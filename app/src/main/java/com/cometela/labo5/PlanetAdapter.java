@@ -2,10 +2,12 @@ package com.cometela.labo5;
 
 import android.content.Context;
 import android.media.Image;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,8 +18,11 @@ import java.util.List;
  */
 
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetViewHolder> {
+
+
     Context myContext;
     List<Planeta> planetaList;
+
 
     @Override
     public PlanetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,13 +35,23 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
     public PlanetAdapter(Context myContext, List<Planeta> planetaList) {
         this.myContext = myContext;
         this.planetaList = planetaList;
+
     }
 
     @Override
-    public void onBindViewHolder(PlanetViewHolder holder, int position) {
+    public void onBindViewHolder(final PlanetViewHolder holder, final int position) {
         holder.title.setText(planetaList.get(position).getTitulo());
         holder.descripcion.setText(planetaList.get(position).getDescripcion());
         holder.imagen.setImageResource(planetaList.get(position).getImagen());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FavoritosFragment fragment = new FavoritosFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("Planeta",planetaList.get(holder.getAdapterPosition()));
+                fragment.setArguments(bundle);
+            }
+        });
     }
 
     @Override
@@ -47,6 +62,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
     protected class PlanetViewHolder extends RecyclerView.ViewHolder{
         ImageView imagen;
         TextView title,descripcion;
+        ImageButton button;
 
 
         public PlanetViewHolder(View itemView){
@@ -55,7 +71,10 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
             title = itemView.findViewById(R.id.Titulo);
             descripcion = itemView.findViewById(R.id.Descripcion);
             imagen = itemView.findViewById(R.id.Imagen);
+            button = itemView.findViewById(R.id.FavoritosButton);
 
         }
     }
+
+
 }

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new PlanetAdapter(this,planetaList);
         recyclerView.setAdapter(adapter);
+
     }
 
     private ArrayList<Planeta> fillLista (){
@@ -45,4 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         return l;
     }
+
+
 }
