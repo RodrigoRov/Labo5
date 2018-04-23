@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
             planet = new Planeta(titulos[i],desc[i],imagenes.getResourceId(i,-1));
             l.add(planet);
         }
+        imagenes.recycle();
         return l;
+
     }
 
     public void CambiarAFavs(View v){
