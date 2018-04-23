@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Favoritos"
             android:textAllCaps="false"
+            android:onClick="cambiarAFavs"
             android:id="@+id/BotonMostarFavs"
             />
     </LinearLayout>

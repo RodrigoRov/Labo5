@@ -46,15 +46,6 @@
 
 
             </LinearLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@android:drawable/btn_star_big_off"
-                android:background="#ffffff"
-                android:layout_marginEnd="4dp"
-                android:id="@+id/FavoritosButton"
-                />
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -11,16 +11,26 @@ public class Planeta implements Parcelable{
     String titulo,descripcion;
     int Imagen;
     int id;
+    private boolean fav;
 
-    public Planeta(String titulo,String descripcion,int Imagen) {
+    public Planeta(String titulo,String descripcion,int Imagen, boolean fav) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.Imagen = Imagen;
+        this.fav = fav;
     }
 
     public Planeta(String titulo, String descripcion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+    }
+
+    public boolean isFav() {
+        return fav;
+    }
+
+    public void setFav(boolean fav) {
+        this.fav = fav;
     }
 
     public String getTitulo() {

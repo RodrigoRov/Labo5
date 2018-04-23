@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new PlanetAdapter(this,planetaList);
+        adapter = new PlanetAdapter(this, planetaList);
         recyclerView.setAdapter(adapter);
 
     }
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         Planeta planet;
         for(int i = 0;i<desc.length;i++){
-            planet = new Planeta(titulos[i],desc[i],imagenes.getResourceId(i,-1));
+            planet = new Planeta(titulos[i],desc[i],imagenes.getResourceId(i,-1), false);
             l.add(planet);
         }
         imagenes.recycle();
@@ -49,7 +49,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void CambiarAFavs(View v){
+    public void cambiarAFavs(View v){
+        recyclerView.setAdapter(new PlanetAdapter(v.getContext(), fillList(planetaList)));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+
+    private ArrayList<Planeta> fillList(List<Planeta> l){
+        ArrayList<Planeta> aux = new ArrayList<>();
+        for (Planeta p: l) {
+            if (p.isFav())
+                aux.add(p);
+        }
+        return aux;
     }
 }
