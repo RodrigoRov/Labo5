@@ -1,9 +1,11 @@
 package com.cometela.labo5;
 
+import android.content.res.TypedArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -33,19 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Planeta> fillLista (){
         ArrayList<Planeta> l = new ArrayList<>();
-        String desc = "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. " +
-                "Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un " +
-                "impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal " +
-                "manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto " +
-                "de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la " +
-                "creación de las hojas \"Letraset\"";
+        String [] desc = getResources().getStringArray(R.array.Parrafos);
+        String [] titulos = getResources().getStringArray(R.array.Planets);
+        TypedArray imagenes = getResources().obtainTypedArray(R.array.ImagenesPlanetas);
 
-        l.add(new Planeta("Ella",desc));
-        l.add(new Planeta("El retorno de Ella",desc));
-        l.add(new Planeta("Ella contraraca",desc));
-
+        Planeta planet;
+        for(int i = 0;i<desc.length;i++){
+            planet = new Planeta(titulos[i],desc[i],imagenes.getResourceId(i,-1));
+            l.add(planet);
+        }
         return l;
     }
 
+    public void CambiarAFavs(View v){
 
+    }
 }
