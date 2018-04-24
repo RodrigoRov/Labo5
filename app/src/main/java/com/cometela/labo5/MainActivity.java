@@ -14,7 +14,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     List<Planeta> planetaList;
     RecyclerView recyclerView;
-    PlanetAdapter adapter;
+    PlanetAdapter adapter,aux;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cambiarAFavs(View v){
-        recyclerView.setAdapter(new PlanetAdapter(v.getContext(), fillList(planetaList)));
+        aux = new PlanetAdapter(v.getContext(), fillList(planetaList));
+        aux.setInFav(true);
+        recyclerView.setAdapter(aux);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+    public void cambiarAPlanet(View v){
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 

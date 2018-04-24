@@ -23,9 +23,9 @@ import java.util.List;
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetViewHolder> {
 
 
-    Context myContext;
-    List<Planeta> planetaList;
-    boolean InFav = false;
+    private Context myContext;
+    private List<Planeta> planetaList;
+    private boolean InFav = false;
 
 
     @Override
@@ -41,7 +41,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
         }
     }
 
-    public PlanetAdapter(Context myContext, List<Planeta> planetaList) {
+    PlanetAdapter(Context myContext, List<Planeta> planetaList) {
         this.myContext = myContext;
         this.planetaList = planetaList;
 
@@ -52,14 +52,18 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
         holder.title.setText(planetaList.get(position).getTitulo());
         holder.descripcion.setText(planetaList.get(position).getDescripcion());
         holder.imagen.setImageResource(planetaList.get(position).getImagen());
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Planeta planet = planetaList.get(position);
-                planet.setFav(!planet.isFav());
-                InFav = !InFav;
-            }
-        });
+        try {
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Planeta planet = planetaList.get(position);
+                    planet.setFav(!planet.isFav());
+                    holder.button.setImageResource(android.R.drawable.btn_star_big_on);
+                }
+            });
+        }catch (NullPointerException ignored){
+           //Log.d("Exception",ignored.getMessage());
+        }
     }
 
     @Override
@@ -67,13 +71,12 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
         return planetaList.size();
     }
 
-    protected class PlanetViewHolder extends RecyclerView.ViewHolder{
+    class PlanetViewHolder extends RecyclerView.ViewHolder{
         ImageView imagen;
         TextView title,descripcion;
         ImageButton button;
 
-
-        public PlanetViewHolder(View itemView){
+        PlanetViewHolder(View itemView){
             super(itemView);
 
             title = itemView.findViewById(R.id.Titulo);
@@ -84,5 +87,11 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.PlanetView
         }
     }
 
+    public boolean isInFav(){
+        return InFav;
+    }
+    public void setInFav(boolean inFav){
+        InFav = inFav;
+    }
 
 }
